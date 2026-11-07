@@ -1,5 +1,8 @@
 # metube-telegram-bot
 
+[![docker](https://github.com/lakmalniranga/metube-telegram-bot/actions/workflows/docker.yml/badge.svg)](https://github.com/lakmalniranga/metube-telegram-bot/actions/workflows/docker.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 > **Notice:** this project was written by AI (Claude, by Anthropic), directed by a human.
 > It has unit tests for the link parsing only. Review the code before running it, and
 > use it at your own risk.
@@ -61,6 +64,20 @@ To build it yourself instead, replace `image:` with `build: ./metube-telegram-bo
 
 with the values in a `.env` file next to the compose file. The bot and MeTube must share a
 Docker network (same compose project works).
+
+## Quick start
+
+```sh
+docker pull ghcr.io/lakmalniranga/metube-telegram-bot:latest
+docker run -d --name metube-telegram-bot --restart unless-stopped \
+  -e TELEGRAM_BOT_TOKEN=123456:your-token \
+  -e TELEGRAM_ALLOWED_CHATS=-1001234567890 \
+  -e METUBE_URL=http://your-metube-host:8081 \
+  ghcr.io/lakmalniranga/metube-telegram-bot:latest
+```
+
+Images are tagged `latest` (the `main` branch), `sha-<commit>` and, for releases, the version
+number (for example `1.0.0`). Pin a version tag if you don't want surprise updates.
 
 ## Develop
 
