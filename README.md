@@ -42,10 +42,13 @@ Keep the token secret and out of version control. Anyone who has it controls the
 
 ## Run with Docker Compose
 
+A prebuilt multi-arch image (amd64 and arm64) is published to GitHub Container Registry by the
+workflow in `.github/workflows/docker.yml`:
+
 ```yaml
 services:
   tube-bot:
-    build: ./metube-telegram-bot
+    image: ghcr.io/lakmalniranga/metube-telegram-bot:latest
     environment:
       TELEGRAM_BOT_TOKEN: "${TELEGRAM_BOT_TOKEN}"
       TELEGRAM_ALLOWED_CHATS: "${TELEGRAM_ALLOWED_CHATS}"
@@ -53,6 +56,8 @@ services:
     depends_on: [metube]
     restart: unless-stopped
 ```
+
+To build it yourself instead, replace `image:` with `build: ./metube-telegram-bot`.
 
 with the values in a `.env` file next to the compose file. The bot and MeTube must share a
 Docker network (same compose project works).
